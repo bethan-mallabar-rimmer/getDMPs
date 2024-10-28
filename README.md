@@ -38,7 +38,7 @@ nrow(diabetes_DMPs$FDR) #this will print the number of DMPs when using less stri
 The function can be used for categorical or continuous variables. By default the function assumes that categorical variables have only 2 levels, e.g. diabetes_status = 'Yes' or 'No'.
 It is possible to adapt for 3+ levels if necessary. The code for this is contained in the function in case you need to adapt it but I've commented it out because it's messy and horrible :/
 
-<b>`cat_var`</b> is the variable being analysed e.g. diabetes_status. Needs have the same name as whichever column in s_sheet contains this data.
+<b>`cat_var`</b> is the variable being analysed e.g. diabetes_status. Needs have the same name as whichever column in `s_sheet` contains this data.
 
 <b>`var_levels`</b> = the 2 groups of cat_var to find DMPs between. Only required for categorical analysis. E.g. var_levels = c('Yes','No') finds DMPs between samples with diabetes_status = 'Yes' vs diabetes_status = 'No'. Must be formatted the same as data in s_sheet. E.g. if s_sheet$diabetes_status = c('diabetes','no diabetes','no diabetes','diabetes') then var_levels = c('diabetes','no_diabetes'). </br>
 Note: <b>order does matter!</b> If cat_var = c('Yes','No') then hypermethylated DMPs have increased methylation in samples *with* diabetes. If cat_var = c('No','Yes') then hypermethylated DMPs are hypermethylated in samples *without* diabetes.
