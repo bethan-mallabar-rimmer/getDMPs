@@ -7,7 +7,7 @@
 #commented it out because it's messy and horrible :/
 
 getDMPs <- function(cat_var = 'diabetes_status',
-                         var_levels = NULL, #leave null for continuous, replace for categorical
+                         var_levels, #leave null for continuous, replace for categorical
                          s_sheet,
                          beta_matrix,
                          adj_var = c('age',
@@ -57,6 +57,8 @@ getDMPs <- function(cat_var = 'diabetes_status',
   #return_bay: ignore and leave as false - was just using this to
   #return results at an earlier stage of the pipeline and fix
   #some stuff.
+
+  if (var_type == 'categorical') {var_levels = NULL}
   
   if(ncol(beta_matrix) != nrow(s_sheet)) {
   stop('beta matrix and s_sheet must contain same number of samples')}
