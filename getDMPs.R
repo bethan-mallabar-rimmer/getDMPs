@@ -5,9 +5,8 @@
 #it is possible to adapt for 3+ levels if necessary. The code for this
 #is contained in the function in case you need to adapt it but I've
 #commented it out because it's messy and horrible :/
-require(limma)
 
-get_cat_DMPs <- function(cat_var = 'diabetes_status',
+getDMPs <- function(cat_var = 'diabetes_status',
                          var_levels = NULL, #leave null for continuous, replace for categorical
                          s_sheet,
                          beta_matrix,
