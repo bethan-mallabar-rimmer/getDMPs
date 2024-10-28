@@ -58,7 +58,7 @@ getDMPs <- function(cat_var = 'diabetes_status',
   #return results at an earlier stage of the pipeline and fix
   #some stuff.
 
-  if (var_type == 'categorical') {var_levels = NULL}
+  if (var_type == 'continuous') {var_levels = NULL}
   
   if(ncol(beta_matrix) != nrow(s_sheet)) {
   stop('beta matrix and s_sheet must contain same number of samples')}
