@@ -48,7 +48,7 @@ from s_sheet before running the function.
   
 <b>`beta_matrix`</b> = your beta matrix (can also be an M value matrix - in fact it probably should be as this is more statistically valid), with sample names in columns, sites in rows. Any samples which do not have variable data (e.g. diabetes_status = NA) should be removed from beta_matrix before running the function
   
-<b>`adj_var`</b> = a list of variables to adjust for in the model e.g. c('age','sex','smoking_status'). Any variables in this list need to be in  the column names of s_sheet
+<b>`adj_var`</b> = optional, a list of variables to adjust for in the model e.g. adj_var = c('age','sex','smoking_status') or adj_var = 'age'. Any variables in this list need to be in  the column names of s_sheet
   
 <b>`annotate_with`</b>: optional! prior to running this function, you can import the Illumina manifest for your platform (e.g. EPIC or EPICv2) as a data frame, and put annotate_with = the name of this data frame. This will automatically annotate all DMPs to come out of the analysis with info in the manifest. The manifest must have the column IlmnID for this to work.
 
