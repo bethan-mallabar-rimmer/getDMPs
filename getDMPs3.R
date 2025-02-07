@@ -10,9 +10,7 @@ getDMPs <- function(cat_var = 'diabetes_status',
                          var_levels, #leave null for continuous, replace for categorical
                          s_sheet,
                          beta_matrix,
-                         adj_var = c('age',
-                                     'sex',
-                                     'smoking_status'),
+                         adj_var, #leave null if not adjusting for anything, otherwise use e.g. adj_var = c('age','sex','smoking_status') or adj_var = 'age'
                          annotate_with = NULL,
                          var_type = 'categorical',
                          return_bay = FALSE) {
@@ -43,9 +41,9 @@ getDMPs <- function(cat_var = 'diabetes_status',
   #have variable data (e.g. diabetes_status = NA) should be removed
   #from beta_matrix before running the function
   
-  #adj_var = a list of variables to adjust for in the model e.g.
-  #c('age','sex','smoking_status'). Any variables in this list need
-  #to be in s_sheet
+  #adj_var = optional, a list of variables to adjust for in the model
+  #e.g. adj_var = c('age','sex','smoking_status'). Any variables in this
+  #list need to be in s_sheet.
   
   #annotate_with: optional! prior to running this function, you can
   #import the Illumina EPICv2 manifest as a data frame, and put
@@ -72,9 +70,14 @@ getDMPs <- function(cat_var = 'diabetes_status',
     cat_f <- as.factor(s_sheet[,colnames(s_sheet) == cat_var])
     
     print('make model matrix to input into linear model')
-    ds <- model.matrix(as.formula(
+    if (is.null(adj_var)) {
+      ds <- model.matrix(as.formula('~0 + cat_f'))
+    } else {
+      ds <- model.matrix(as.formula(
       paste0('~0 + cat_f + s_sheet$', paste(adj_var, collapse=" + s_sheet$"))
     ))
+    }
+    
     #sometimes the above step removes samples, even when those samples don't
     #have any missing data - not sure why
     #at this point make sure ds and beta_matrix match by removing the same
@@ -199,9 +202,13 @@ getDMPs <- function(cat_var = 'diabetes_status',
     cat_f <- s_sheet[,colnames(s_sheet) == cat_var]
     
     print('make model matrix to input into linear model')
-    ds <- model.matrix(as.formula(
+    if (is.null(adj_var)) {
+      ds <- model.matrix(as.formula('~cat_f'))
+    } else {
+      ds <- model.matrix(as.formula(
       paste0('~cat_f + s_sheet$', paste(adj_var, collapse=" + s_sheet$"))
     ))
+    }
     
     print('run linear model')
     tlm <- lmFit(beta_matrix, ds)
