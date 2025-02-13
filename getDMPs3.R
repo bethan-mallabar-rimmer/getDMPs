@@ -106,7 +106,7 @@ getDMPs <- function(cat_var = 'diabetes_status',
     }
     
     print('make contrast matrix')
-    contm <- makeContrasts(case_vs_control = paste0('cat_f',var_levels[1],' - cat_f',var_levels[2]), levels=ds.)
+    contm <- makeContrasts(case_vs_control = paste0('cat_f',var_levels[1],' - cat_f',var_levels[2]), levels=ds)
 
     print('fit linear model to contrasts')
     clm <- contrasts.fit(tlm, contm)
