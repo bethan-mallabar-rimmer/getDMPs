@@ -94,21 +94,22 @@ getDMPs <- function(cat_var = 'diabetes_status',
     print('run linear model')
     tlm <- lmFit(beta_matrix, ds)
     
-    print('rename columns to avoid errors')
-    temp_dlm <- col_rename(column_names = adj_var,
+    if  (!is.null(adj_var)) {
+      print('rename columns to avoid errors')
+      temp_dlm <- col_rename(column_names = adj_var,
                            design_sample = ds,
                            linear_model = tlm,
                            ss = s_sheet,
                            cat_factor = cat_f)
-    tlm2 <- temp_dlm[[1]]
-    ds2 <- temp_dlm[[2]]
+      tlm <- temp_dlm[[1]]
+      ds <- temp_dlm[[2]]
+    }
     
     print('make contrast matrix')
-
-    contm <- makeContrasts(case_vs_control = paste0('cat_f',var_levels[1],' - cat_f',var_levels[2]), levels=ds2)
+    contm <- makeContrasts(case_vs_control = paste0('cat_f',var_levels[1],' - cat_f',var_levels[2]), levels=ds.)
 
     print('fit linear model to contrasts')
-    clm <- contrasts.fit(tlm2, contm)
+    clm <- contrasts.fit(tlm, contm)
       
     print('empirical Bayesian estimation of differentially expressed genes (DEGs)')
     bay <- eBayes(clm)
