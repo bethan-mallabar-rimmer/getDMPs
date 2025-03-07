@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Mallabar-Rimmer
+    given-names: Bethan
+    orcid: https://orcid.org/0009-0004-4345-8414
+title: "getDMPs"
+version: 1.2.3
+date-released: 2025-02-13
+url: "https://github.com/bethan-mallabar-rimmer/getDMPs"
